@@ -22,17 +22,19 @@ public class Chess {
 		
 		System.out.println("Welcom to cherss game!");
 		Chess chess=new Chess();
+		chess.printBorad();			
+		chess.setPosition();
+
 		chess.printBorad();
-		System.out.println("Enter row and col for two bishops:");
-		for (int i=1; i<=2; i++) { 
-			chess.setRow(reader.nextInt());
-			chess.setCol(reader.nextInt());
-			int row=chess.getRow();
-			int col=chess.getCol();
-			if (0<=row && row<chess.getBoard().length && 0<=col && col<chess.getBoard().length) {
-				
-				
-			} //make sure user's input are in matrix bounds.
+			//while(inrange) {} //TODO add while loop
+//			if (0<=row && row<chess.getBoard().length && 0<=col && col<chess.getBoard().length) {
+//				
+//				
+//			} //make sure user's input are in matrix bounds.
+//			else {
+//				chess.inrange=false;
+//				System.out.println("the input do'nt exsist in the borad");
+//			}
 
 			
 		}
@@ -71,6 +73,60 @@ public class Chess {
 		}
 		}
 	}
+	public void setPosition() {
+		boolean flag=true;
+			while(flag) {
+				System.out.println("Enter row and col for the KING");
+				System.out.println("Enter row:");
+				int r=reader.nextInt();
+				System.out.println("Enter col:");
+				int c=reader.nextInt();
+				if (0<=row && row<getBoard().length && 0<=col && col<getBoard().length) {
+						setKing(r, c);
+						flag=false;
+				}
+				else {
+					System.out.println("input out of range-try again");
+				}
+			}
+			flag=true;
+			while(flag) {
+				System.out.println("Enter row and col for the Queen");
+				System.out.println("Enter row:");
+				int r=reader.nextInt();
+				System.out.println("Enter col:");
+				int c=reader.nextInt();
+				if (0<=row && row<getBoard().length && 0<=col && col<getBoard().length) {
+						if(setQueen(r, c)) {
+						flag=false;
+						}
+				}
+				else {
+					System.out.println("input out of range-try again");
+				}
+			}
+			
+			
+	
+			
+	}
+	public void setKing(int r,int c) {
+		board[r][c]='K';
+		
+	}
+	public boolean setQueen(int r,int c) {
+		System.out.println("Enter row and col for the Queen");
+		if(board[r][c]=='-') {
+			board[r][c]='Q';
+			return true;
+		}
+		else {
+			System.out.println("the king is already in this possition");
+			return false;
+		}
+		
+	}
+	
 	public boolean netCheck(){
 		while (0<=rowcheck && rowcheck<board.length && 0<=colcheck && colcheck<board.length) //check bottom right diagonal line for bishops.
 		{
